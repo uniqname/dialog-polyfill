@@ -216,6 +216,7 @@ var dialogPolyfill = (function() {
             // Would another Array method be more performant? e.g. filter, find, reduce?
             Array.prototype.forEach.call(dialogForms, function(form) {
                 if (target.type === 'submit' && isDescendant(form, target)) {
+                    if (!form.checkValidity()) return;
                     e.preventDefault();
                     if (typeof CustomEvent === "function") { //IE 11 reports a `CustomEvent` object
                         event = new CustomEvent('dialog_submit', {
